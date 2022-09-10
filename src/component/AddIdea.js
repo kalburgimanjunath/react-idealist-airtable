@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import ListIdea from './ListIdea';
 import { Label, FormGroup, Input, Button } from 'reactstrap';
+import { useAlert } from 'react-alert';
 export default function AddIdea() {
   const [ideas, setIdeas] = useState();
   const [image_url, setUrl] = useState();
+  const alert = useAlert();
   useEffect(() => {
     fetch(
       'https://api.airtable.com/v0/appWToptGxYlLEtgo/Ideas?api_key=keyeNXyxxuuYJY19w'
@@ -46,7 +48,9 @@ export default function AddIdea() {
     };
     fetch(url, requestOptions).then((response) => response.json());
     // .then((data) => console.log(data));
+    alert.show('Oh look, an alert!');
   };
+
   return (
     <div className="row">
       <div className="col">
@@ -73,11 +77,12 @@ export default function AddIdea() {
             // }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
               saveData({ fields: values });
               setSubmitting(false);
+              resetForm({ values: '' });
             }, 400);
           }}
         >

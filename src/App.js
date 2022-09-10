@@ -17,10 +17,10 @@ export default function App() {
     console.log(user);
     return (
       <>
-        <div className="col-12">
+        <div className="col-12" style={{ padding: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div>
-              <h1>Hello {user.user.displayName}</h1>
+              <h1>Hello, {user.user.displayName}</h1>
             </div>
           </div>
           <div
